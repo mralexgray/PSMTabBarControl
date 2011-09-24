@@ -1206,6 +1206,30 @@
 		}
 		[self setNeedsDisplay:YES];
 	}
+    else if ([theEvent type] == NSLeftMouseDown)
+    {
+        NSWindow* window = [self window];
+        NSPoint startMousePos = [window convertBaseToScreen:[theEvent locationInWindow]];
+        NSPoint origin = [window frame].origin;
+        
+        while (YES)
+        {
+            
+            NSEvent* newEvent = [window nextEventMatchingMask:(NSLeftMouseDraggedMask | NSLeftMouseUpMask)];
+            
+            // stop when the user releases the mouse
+            if ([newEvent type] == NSLeftMouseUp) break;
+            
+            // find the amount that the mouse moved
+            NSPoint mousePos = [window convertBaseToScreen:[newEvent locationInWindow]];
+            origin.x += mousePos.x - startMousePos.x;
+            origin.y += mousePos.y - startMousePos.y;
+            startMousePos = mousePos;
+            
+            // set the new origin
+            [window setFrameOrigin:origin];
+        }
+    }
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {

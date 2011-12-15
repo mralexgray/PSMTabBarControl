@@ -543,9 +543,8 @@ static PSMTabDragAssistant *sharedDragAssistant = nil;
 
 #pragma mark -
 #pragma mark Private
-
 - (NSImage *)_imageForViewOfCell:(PSMTabBarCell *)cell styleMask:(NSUInteger *)outMask {
-	PSMTabBarControl *control = [cell controlView];
+	PSMTabBarControl *control = (id)[cell controlView];
 	NSImage *viewImage = nil;
 
 	if(outMask) {

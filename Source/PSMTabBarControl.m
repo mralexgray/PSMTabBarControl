@@ -12,10 +12,6 @@
 #import "PSMRolloverButton.h"
 #import "PSMTabStyle.h"
 #import "PSMMetalTabStyle.h"
-#import "PSMAquaTabStyle.h"
-#import "PSMUnifiedTabStyle.h"
-#import "PSMAdiumTabStyle.h"
-#import "PSMLiveChatTabStyle.h"
 #import "PSMTabDragAssistant.h"
 #import "PSMTabBarController.h"
 
@@ -347,19 +343,7 @@
 }
 
 - (void)setStyleNamed:(NSString *)name {
-	id <PSMTabStyle> newStyle;
-	if([name isEqualToString:@"Aqua"]) {
-		newStyle = [[PSMAquaTabStyle alloc] init];
-	} else if([name isEqualToString:@"Unified"]) {
-		newStyle = [[PSMUnifiedTabStyle alloc] init];
-	} else if([name isEqualToString:@"Adium"]) {
-		newStyle = [[PSMAdiumTabStyle alloc] init];
-	} else if([name isEqualToString:@"LiveChat"]) {
-		newStyle = [[PSMLiveChatTabStyle alloc] init];
-	} else {
-		newStyle = [[PSMMetalTabStyle alloc] init];
-	}
-
+	id <PSMTabStyle> newStyle = [[PSMMetalTabStyle alloc] init];
 	[self setStyle:newStyle];
 	[newStyle release];
 }
